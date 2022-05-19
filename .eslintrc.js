@@ -1,5 +1,5 @@
 module.exports = {
-  root: true,
+  // root: true,
   env: {
     browser: true,
     es2021: true,
@@ -32,7 +32,7 @@ module.exports = {
   },
   rules: {
     'react/react-in-jsx-scope': 'off',
-    'prettier/prettier':0,
+    'prettier/prettier':'off',
     'no-unused-vars': 'off',
   },
 };

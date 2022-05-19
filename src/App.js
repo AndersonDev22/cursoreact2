@@ -1,34 +1,66 @@
-//USE CALLBACK GERALMENTE USANDO EM OTIMIZAÇÕES
-//USAR EM FUNÇÕES QUE RENDERIZEM COISAS PESADAS
-
-//useCallback(função, [array de dependências])
-
-import P from 'prop-types';
 import './App.css';
-import React, { useState, useEffect, useCallback } from 'react';
+import PropType from 'prop-types'
+import { useReducer, useContext, createContext } from 'react'
 
-const Button = React.memo(function Button({ incrementButton }) {
-  return <button onClick={() => incrementButton(10)}>+</button>
-});
+//actions.js
+export const actions = {
+  CHANGE_TITLE:'CHANGE_TITLE',
+};
 
-Button.propTypes = {
-  incrementButton: P.func,
-}
+//data.js
+export const globalState = {
+  title: 'O título é esse: ',
+  body: 'o body é esse',
+  counter: 0
+};
 
-function App() {
-  const [counter, setCounter] = useState(0);
+//reducer.js
+export const reducer = (state, action) => {
+  console.log(action)
+  return { ...state }
+};
 
-  const incrementCounter = useCallback((num) => {
-    setCounter((c) => c + num); //função de callback
-  }, []);
+//AppContext.jsx
+export const Context = createContext();
+export const AppContext = ({ children }) => {
+  const [state, dispatch] = useReducer(reducer, globalState);
+
+  const changeTitle = ()=>{
+    dispatch({ type: actions.CHANGE_TITLE })
+  }
 
   return (
-    <div className="App">
-      <p>useCallback</p>
-      <h1>Contador: {counter}</h1>
-      <Button incrementButton={incrementCounter} />
-    </div>
+    <Context.Provider value={{ state, changeTitle }}>
+      {children}
+    </Context.Provider>
+  );
+};
+
+AppContext.propTypes = {
+  children: PropType.node,
+};
+
+//H1 - index.jsx
+export const H1 = () => {
+  const context = useContext(Context)
+
+  return (
+    <h1 onClick={() => context.changeTitle}>
+      {context.state.title}
+    </h1>
   );
 }
-export default App;
+
+//App.jsx
+export default function App() {
+
+  return (
+    <AppContext>
+      <div>
+        <H1 />
+      </div>
+    </AppContext>
+  );
+};
+
 
