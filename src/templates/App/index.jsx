@@ -1,10 +1,14 @@
+import { Posts } from '../../components/Posts';
+import { PostsProvider } from '../../contexts/PostsProvider';
 import './styles.css';
 
 export default function App() {
   return (
+    <PostsProvider>
     <div>
-      <h1>Anderson</h1>
+      <Posts/>
     </div>
+    </PostsProvider>
   );
 };
 
