@@ -1,23 +1,35 @@
-import { Heading } from ".";
+import { Heading } from '.';
 
 export default {
   title: 'Heading', //Titulo que vai aparecer no storybook
   component: Heading,
-  args:{
-    children:'Anderson',
+  args: {
+    children: 'O texto está escuro',
   },
 
-  argTypes:{
-    children:{type:'string'},
+  argTypes: {
+    children: { type: 'string' },
   },
 
-parameters:{
-  backgrounds:{
-    default:'dark',
-  },
+  parameters: {
+    backgrounds: {
+      default: 'dark',
+    },
 
-},
+  },
 
 };
 
-export const Template = (args) => <Heading {...args}/>;
+export const Light = (args) => <Heading {...args} />;
+export const Dark = (args) => <Heading {...args} />;
+
+Light.parameters = {
+  backgrounds: {
+    default: 'light',
+  },
+};
+
+Dark.args= {
+  children: 'O texto está Claro',
+  colorDark: false,
+};
