@@ -1,17 +1,22 @@
-import P from 'prop-types'
+import P from 'prop-types';
+import * as Styled from './styles';
 
-import * as Styled from './styles'
-
-export const Heading = ({ children, colorDark = true, as = 'h1' }) => {
+export const Heading = ({
+  children,
+  colorDark = true,
+  as = 'h1',
+  size = 'big',
+}) => {
   return (
-    <Styled.Title colorDark={colorDark} as={as}>
+    <Styled.Title colorDark={colorDark} as={as} size={size}>
       {children}
     </Styled.Title>
-  )
+  );
 };
 
 Heading.propTypes = {
   children: P.node.isRequired,
   colorDark: P.bool.isRequired,
-  as: P.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'h6'])
+  as: P.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'h6']),
+  size: P.oneOf(['small', 'medium', 'big'])
 }
