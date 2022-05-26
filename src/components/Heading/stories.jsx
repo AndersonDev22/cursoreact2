@@ -29,7 +29,7 @@ Light.parameters = {
   },
 };
 
-Dark.args= {
+Dark.args = {
   children: 'O texto está Claro',
   colorDark: false,
 };
